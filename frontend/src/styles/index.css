@@ -11188,9 +11188,16 @@ p {
   overflow: hidden;
 }
 
+.project-card {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
 .portfolio-card .portfolio-card-img {
   width: 100%;
-  height: 350px;
+  height: 250px;
   object-fit: cover;
 }
 
@@ -11214,6 +11221,22 @@ p {
   overflow: hidden;
 }
 
+
+.section-porfolio {
+  max-width: 70%; /* Limita el ancho máximo */
+  max-height: 540px; /* Limita el alto máximo */
+  margin: 0 auto; /* Centra horizontalmente */
+  padding: 20px; /* Espaciado interno opcional */
+  box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
+  overflow-y: auto; /* Agrega barra de desplazamiento si el contenido excede el alto */
+}
+
+.section-porfolio{
+  scrollbar-width: none; /* Oculta la barra en navegadores basados en Firefox */
+  -ms-overflow-style: none; /* Oculta la barra en IE y Edge heredado */
+}
+
+
 @media (prefers-reduced-motion: reduce) {
   .portfolio-card .portfolio-card-overlay {
     -webkit-transition: none;
@@ -11224,12 +11247,53 @@ p {
 .portfolio-card .portfolio-card-overlay .portfolio-card-caption {
   display: block;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
   width: 100%;
+  height: 100%;
+  h4 {
+    color: #474E93;
+  }
+}
+
+/* configuracion para las skill que se muestran en el overlay  */
+.skills-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+      justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+      align-items: center;
+  margin-top: 20px;
+}
+.skill-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+      justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+      align-items: center;
+  margin: 2px 3px;
+  padding:  4px;
+  border-radius: 10px;
+  background: #72BAA9;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  p {
+    margin: 0;
+    color: #fff;
+  }
 }
 
 .portfolio-card:hover .portfolio-card-overlay {
@@ -11249,148 +11313,7 @@ p {
   }
 }
 
-/* Pricing card */
-.pricing-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-}
 
-.pricing-wrapper .pricing-card {
-  display: block;
-  border: 1px solid #dee2e6;
-  padding: 30px 15px;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  -webkit-flex-basis: 0;
-      -ms-flex-preferred-size: 0;
-          flex-basis: 0;
-  background: #fff;
-  -webkit-transition: all, 0.3s;
-  transition: all, 0.3s;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pricing-wrapper .pricing-card {
-    -webkit-transition: none;
-    transition: none;
-  }
-}
-
-.pricing-wrapper .pricing-card-header .pricing-card-icon {
-  width: 70px;
-  margin-bottom: 25px;
-}
-
-.pricing-wrapper .pricing-card-footer {
-  margin: 15px 0;
-}
-
-.pricing-wrapper .pricing-card-footer span {
-  font-size: calc(18px + (35 - 18) * ((100vw - 300px) / (1300 - 300)));
-  font-weight: 600;
-  opacity: .8;
-}
-
-.pricing-wrapper .pricing-card-footer span:first-child {
-  position: relative;
-  right: -6px;
-  top: -6px;
-  font-size: calc(15px + (25 - 15) * ((100vw - 300px) / (1300 - 300)));
-}
-
-.pricing-wrapper .pricing-card-title {
-  margin-bottom: 15px;
-  font-size: calc(18px + (35 - 18) * ((100vw - 300px) / (1300 - 300)));
-}
-
-.pricing-wrapper .pricing-card-list p {
-  margin-bottom: 12px;
-  font-weight: 500;
-  opacity: .6;
-}
-
-.pricing-wrapper .pricing-card-list p i {
-  color: #ec185d;
-}
-
-.pricing-wrapper .pricing-card:hover {
-  -webkit-transform: translateY(-5px);
-      -ms-transform: translateY(-5px);
-          transform: translateY(-5px);
-  border-radius: 0 !important;
-}
-
-.pricing-wrapper .pricing-card:first-child {
-  border-radius: 0 0 0 0;
-}
-
-.pricing-wrapper .pricing-card:nth-child(2) {
-  margin-left: -1px;
-  margin-right: -1px;
-}
-
-.pricing-wrapper .pricing-card:last-child {
-  border-radius: 0 0 0 0;
-}
-
-@media (max-width: 767.98px) {
-  .pricing-wrapper {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-  .pricing-card {
-    border-radius: 0 !important;
-    margin: 0 0 15px 0 !important;
-    width: 100%;
-  }
-}
-
-/* testmonial card */
-.testimonial-card {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-bottom: 30px;
-}
-
-.testimonial-card-img-holder {
-  min-width: 45px;
-  max-width: 45px;
-  z-index: 999;
-}
-
-.testimonial-card-img {
-  background: #fff;
-  padding: 4px;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-}
-
-.testimonial-card-body {
-  text-align: left;
-  border: 1px solid #dee2e6;
-  background: #fff;
-  padding: 20px 20px 20px 60px;
-  border-radius: 0;
-}
-
-.testimonial-card-title {
-  margin-top: 20px;
-  font-size: calc(14px + (18 - 14) * ((100vw - 300px) / (1300 - 300)));
-}
 
 /* blog wrapper */
 .blog-card {
@@ -11617,7 +11540,7 @@ pre .code {
   -webkit-transition: all, 0.3s;
   transition: all, 0.3s;
   font-family: 'Baloo Paaji', cursive;
-  /* background: #062c33; */
+  background: tra;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -11695,7 +11618,7 @@ pre .code {
 .custom-navbar .nav .item .link:hover, .custom-navbar .nav .item .link.active {
   color: #695aa6;
 }
-
+/* esta esla parte para el cambio de color del navbar  */
 .custom-navbar.affix {
   background: #fff;
   border-bottom: 1px solid rgba(222, 226, 230, 0.34);

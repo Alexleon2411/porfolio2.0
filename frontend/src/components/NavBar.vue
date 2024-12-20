@@ -26,7 +26,7 @@
     </nav>
 </template>
 
-<script>
+<script >
 import $ from 'jquery'
 
 export default {
@@ -50,6 +50,14 @@ export default {
         $(this).toggleClass('is-active');
         $('ul.nav').toggleClass('show');
       });
+    });
+    //esta esla parte para el cambio de color del navbar
+    $(window).on('scroll', function() {
+      if ($(window).scrollTop() > 50) { // Ajusta el umbral de 50px según tus necesidades
+        $('.custom-navbar').addClass('affix');
+      } else {
+        $('.custom-navbar').removeClass('affix');
+      }
     });
   }
 }
