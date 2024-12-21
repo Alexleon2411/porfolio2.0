@@ -1,6 +1,9 @@
 <template>
 
+  <h3 class="items-center flex justify-center">My Skills</h3>
   <div ref="galleryRef" class="gallery">
+    <div class="w-full mx-auto">
+    </div>
     <ul class="cards">
       <li>
         <div class="body">
@@ -144,7 +147,6 @@ onMounted(() => {
 	width: 100%;
 	height: 500px;
 	overflow: hidden;
-  margin-bottom: 10px;
 }
 
 .cards {
@@ -177,7 +179,7 @@ onMounted(() => {
   :hover {
     line-height: 10px;
     .title {
-      width: 10% ;
+      width: 100% ;
       margin: auto;
     }
     .icon {

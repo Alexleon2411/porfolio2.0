@@ -12,6 +12,7 @@ export const  useAppStore = defineStore('skills', () => {
     description: '',
     skills: [],
     imgUrl:[],
+    url: ''
   })
 
   async function uploadImage(bucketName, files) {
@@ -47,9 +48,9 @@ export const  useAppStore = defineStore('skills', () => {
       .from('project')
       .insert([
         {
-          name: projectData.value.name, 
-          description: projectData.value.description, 
-          skills, 
+          name: projectData.value.name,
+          description: projectData.value.description,
+          skills,
           imgUrl: imageUrls
         }
       ])

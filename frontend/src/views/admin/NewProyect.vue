@@ -34,7 +34,7 @@
       <label for="title" class="block text-sm font-medium text-blue-900">Nombre del Projecto </label>
       <input v-model="store.projectData.name" type="text" id="title" class="mt-1 block w-full py-2 px-3 border border-purple-700 rounded-md shadow-sm focus:outline-none focus:ring-pink-500 focus:border-indigo-500 sm:text-sm" required>
     </div>
-    
+
     <!-- imagen del producto -->
     <div class=" mb-5">
       <label for="image" class="block text-md font-medium text-blue-900">Imagen del Projecto</label>
@@ -61,6 +61,12 @@
     <div class="mb-4">
       <label for="description" class="block text-sm font-medium text-blue-900">Descripción del Servicio</label>
       <input v-model="store.projectData.description" type="text" id="description" class="mt-1 block w-full py-2 px-3 border border-purple-700 rounded-md shadow-sm focus:outline-none focus:ring-pink-500 focus:border-indigo-500 sm:text-sm" required>
+    </div>
+
+    <!-- url -->
+    <div class="mb-4">
+      <label for="url" class="block text-sm font-medium text-blue-900">Url del proyecto</label>
+      <input v-model="store.projectData.url" type="text" id="url" class="mt-1 block w-full py-2 px-3 border border-purple-700 rounded-md shadow-sm focus:outline-none focus:ring-pink-500 focus:border-indigo-500 sm:text-sm" required>
     </div>
 
     <!-- skills -->
@@ -105,7 +111,7 @@ const showAddSkill = ref(false)
 const newSkill = ref('')
 const skills = ref(['JavaScript', 'HTML', 'CSS', 'Tailwinds CSS'])
 const selectedCategory = ref([])
-const previewImages = ref([]) 
+const previewImages = ref([])
 
 /// methods
 
