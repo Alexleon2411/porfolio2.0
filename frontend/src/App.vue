@@ -7,8 +7,8 @@ import $ from 'jquery';
 </script>
 
 <template>
-  <NavBar/>
-<RouterView class="mt-16"></RouterView>
+  <NavBar class=""/>
+<RouterView class="mt-20"></RouterView>
 </template>
 
 <style scoped>

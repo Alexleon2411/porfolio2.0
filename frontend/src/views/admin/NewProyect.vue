@@ -1,35 +1,10 @@
 <template>
-  <!-- <div class="mx-auto flex justify-center">
-    <div>
-      <div class="bg-white shadow p-3">
-        <h1 class="text-6xl">Register New project</h1>
-        <form @submit.prevent="uploadImage" class="">
-          <div class="w-full my-4">
-            <input type="text" placeholder="Name" class="rounded bg-slate-300 font-serif p-1 border-separate mb-3 font-black">
-          </div>
-          <div>
-            <h2 class="">Subir Imagen</h2>
-            <input type="file" @change="onFileChange" accept="image/*" />
-          </div>
-          <div class="my-2">
-            <button type="submit" :disabled="!selectedFile || loading" class="rounded bg-slate-300 p-2">
-              {{ loading ? "Subiendo..." : "Subir Imagen" }}
-            </button>
-          </div>
-        </form>
-
-        <div v-if="imageUrl" class="image-preview">
-          <h2>Imagen Subida:</h2>
-          <img :src="imageUrl" alt="Imagen subida" />
-        </div>
-      </div>
-  </div> -->
-
   <div class="w-2/3 ml-5 lg:ml-20 mt-5 flex jutidy-start ">
-    <router-link class="rounded-lg text-white p-2 bg-indigo-900" >Volver</router-link>
+    <router-link class="rounded-lg text-white p-2 bg-indigo-900" :to="{name: 'projects'}">Volver</router-link>
   </div>
   <form @submit.prevent="handleSubmit" class="w-11/12 lg:w-2/5  mx-auto p-8 bg-white shadow-md rounded-lg my-10">
     <!-- Title -->
+    <h3>Crear Projecto</h3>
     <div class="mb-4">
       <label for="title" class="block text-sm font-medium text-blue-900">Nombre del Projecto </label>
       <input v-model="store.projectData.name" type="text" id="title" class="mt-1 block w-full py-2 px-3 border border-purple-700 rounded-md shadow-sm focus:outline-none focus:ring-pink-500 focus:border-indigo-500 sm:text-sm" required>
@@ -66,7 +41,7 @@
     <!-- url -->
     <div class="mb-4">
       <label for="url" class="block text-sm font-medium text-blue-900">Url del proyecto</label>
-      <input v-model="store.projectData.url" type="text" id="url" class="mt-1 block w-full py-2 px-3 border border-purple-700 rounded-md shadow-sm focus:outline-none focus:ring-pink-500 focus:border-indigo-500 sm:text-sm" required>
+      <input v-model="store.projectData.projectUrl" type="text" id="url" class="mt-1 block w-full py-2 px-3 border border-purple-700 rounded-md shadow-sm focus:outline-none focus:ring-pink-500 focus:border-indigo-500 sm:text-sm" required>
     </div>
 
     <!-- skills -->
@@ -97,16 +72,10 @@
 <script setup>
 import { ref } from 'vue';
 import { useAppStore } from '../../store/appStore';
-import NavBar from '../../components/NavBar.vue'
 
 const selectedFile = ref([]); // Archivo seleccionado por el usuario
-const imageUrl = ref(null); // URL pública de la imagen subida
 const loading = ref(false); // Estado de carga
 const store = useAppStore()
-const stillOptions = ['JavaScript, Css, HTML, Tailwinds, Firebase']
-const showAddCategory = ref(false)
-const newCategories = ref('')
-const imageUploaded = ref(false)
 const showAddSkill = ref(false)
 const newSkill = ref('')
 const skills = ref(['JavaScript', 'HTML', 'CSS', 'Tailwinds CSS'])
@@ -132,10 +101,6 @@ const previewImages = ref([])
     console.log(event.target.files);
   }
 
-  const addMoreCategory = (data) => {
-    console.log(data);
-  }
-
   const handleSubmit = async () => {
     if (!selectedFile.value) return;
     loading.value = true;
@@ -150,21 +115,6 @@ const previewImages = ref([])
       selectedFile.value = null;
     }
   }
-
-  const uploadImage = async () => {
-    if (!selectedFile.value) return;
-    loading.value = true;
-    try {
-      // // Subir la imagen al bucket "project-images"
-      const result = await store.createProject(selectedFile.value)
-    } catch (error) {
-      console.error('Error al subir la imagen:', error.message);
-      alert('Error al subir la imagen.');
-    } finally {
-      loading.value = false;
-      selectedFile.value = null;
-    }
-  };
 </script>
 
 <style lang="scss" scoped>

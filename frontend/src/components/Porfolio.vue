@@ -18,7 +18,7 @@
                     </a>
                 </div>
                 <div class="col-md-6">
-                    <a href="https://le-auto-alexleon2411.herokuapp.com/" class="portfolio-card" target="_blank">
+                    <a href="https://le-auto-alexleon2411.herokuapp.com" class="portfolio-card" target="_blank">
                         <img class="portfolio-card-img img-responsive rounded" src="../imgs/le-auto3.png" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
                         <span class="portfolio-card-overlay">
                             <span class="portfolio-card-caption">

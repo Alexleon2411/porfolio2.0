@@ -32,25 +32,25 @@ const router = createRouter({
       path: '/admin',
        name: 'admin',
        component: () => import('../views/admin/AdminLayout.vue'),
-       meta: { requiresAuth: true },
+      //  meta: { requiresAuth: true },
        children: [
         {
         path: 'projects',
         name: 'projects',
         component: () => import('../views/admin/ProjectView.vue'),
-        meta: { requiresAuth: true },
+        // meta: { requiresAuth: true },
         },
         {
           path: 'projects/nuevo',
           name: 'new-project',
           component: () => import('../views/admin/NewProyect.vue'),
-          meta: { requiresAuth: true },
+          // meta: { requiresAuth: true },
         },
         {
           path: 'projects/editar/:id',
           name: 'edit-project',
           component: () => import('../views/admin/EditProjectView.vue'),
-          meta: { requiresAuth: true },
+          // meta: { requiresAuth: true },
         },
 
        ]
