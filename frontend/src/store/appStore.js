@@ -75,7 +75,6 @@ export const  useAppStore = defineStore('skills', () => {
   }
 
   async function fetchProjectById(projectId) {
-
     const { data, error } = await supabase
       .from('project')
       .select()
@@ -88,8 +87,7 @@ export const  useAppStore = defineStore('skills', () => {
     console.log('Proyecto obtenido:', data);
     projectData.value = data[0];
     console.log(projectData.value)
-    router.push({ name: 'edit-project', params: { id: projectId } });
-  
+    return data[0]
   }
 
   async function getProjects() {
