@@ -14,6 +14,7 @@ export const  useAppStore = defineStore('skills', () => {
     imgUrl:[],
     projectUrl: ''
   })
+  const openDialog = ref(false)
 
   function defaultValues() {
     projectData.value = {
@@ -75,7 +76,6 @@ export const  useAppStore = defineStore('skills', () => {
   }
 
   async function fetchProjectById(projectId) {
-
     const { data, error } = await supabase
       .from('project')
       .select()
@@ -88,8 +88,7 @@ export const  useAppStore = defineStore('skills', () => {
     console.log('Proyecto obtenido:', data);
     projectData.value = data[0];
     console.log(projectData.value)
-    router.push({ name: 'edit-project', params: { id: projectId } });
-  
+    return data[0]
   }
 
   async function getProjects() {
@@ -169,18 +168,47 @@ export const  useAppStore = defineStore('skills', () => {
     }
     // Después de eliminar las imágenes, eliminar el proyecto
     const { data: projectData, error: projectError } = await supabase
-      .from('project')
-      .delete()
-      .eq('id', projectId);
+        .from('project')
+        .delete()
+        .eq('id', projectId);
 
-    if (projectError) {
-      console.log("Error al eliminar el proyecto:", projectError.message);
-    } else {
-     console.log("Proyecto eliminado:", projectData);
-      // router.push({ name: 'projects' });
-      return true
-    }
+      if (projectError) {
+        console.log("Error al eliminar el proyecto:", projectError.message);
+      } else {
+      console.log("Proyecto eliminado:", projectData);
+        // router.push({ name: 'projects' });
+        return true
       }
+  }
+
+  async function login (email, password) {
+    const data = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    })
+
+    const { data: { session, user, error }} = data
+    if (error) {
+      console.log('Error al iniciar sesión:', error.message)
+      return false
+    }
+    console.log('Usuario:', user)
+    console.log('Sesión:', session)
+    router.push({ name: 'projects' })
+    return true
+  }
+
+  async function logout() { 
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error('Error al cerrar sesión:', error.message);
+      return false;
+    }
+    console.log('Sesión cerrada correctamente.');
+    router.push({ name: 'login' });
+    return true;
+  } 
+  
   return {
     createProject,
     uploadImage,
@@ -188,8 +216,11 @@ export const  useAppStore = defineStore('skills', () => {
     fetchProjectById,
     updateProject,
     deleteProject,
+    login,
+    logout,
     imageUrl,
     projectData,
+    openDialog,
   }
 
 }, {

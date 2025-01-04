@@ -1,6 +1,6 @@
 <template>
 
-  <h3 class="items-center flex justify-center">My Skills</h3>
+  <h3 class="items-center flex justify-center mt-10">My Skills</h3>
   <div ref="galleryRef" class="gallery">
     <div class="w-full mx-auto">
     </div>

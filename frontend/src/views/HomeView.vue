@@ -3,6 +3,7 @@
   <AboutView/>
   <Skills/>
   <Porfolio/>
+  <LoginView></LoginView>
   <Footer/>
 </template>
 
@@ -15,6 +16,7 @@ import AboutView from './AboutView.vue';
 import Skills from '../components/Skills.vue';
 import Porfolio from '../components/Porfolio.vue';
 import Footer from '../components/Footer.vue';
+import LoginView from './admin/LoginView.vue';
 
   const selectedFile = ref(null); // Archivo seleccionado por el usuario
   const imageUrl = ref(null); // URL pública de la imagen subida
