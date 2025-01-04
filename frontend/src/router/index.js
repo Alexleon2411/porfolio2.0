@@ -3,6 +3,7 @@ import { createMemoryHistory, createRouter, createWebHashHistory, createWebHisto
 // import { onAuthStateChanged } from 'firebase/auth'
 // import { useFirebaseAuth } from 'vuefire'
 import HomeView from '../views/HomeView.vue'
+import { supabase } from '../config/supabaseClient'
 
 
 const router = createRouter({
@@ -68,16 +69,13 @@ const router = createRouter({
 
 // router.beforeEach(async(to, from, next) => {
 //   // para saber si es necesario la autenticacion
-//   const requiresAuth = to.matched.some(url => url.meta.requiresAuth)
+//   const {data: { requiresAuth } }= await supabase.auth.getSession();
+
+//   console.log( 'froml router', requiresAuth) 
 //   if (requiresAuth){
+    
 //     //comprobar si el usuario esta autenticado
-//     try {
-//        await authenticateUser()
-//        next()
-//     } catch (error) {
-//         console.log(error)
-//         next({name: 'login'})
-//     }
+//     next('/login')
 //   }else {
 //     // no esta protegido el endpoint por lo tanto mostramos la vista
 //     next()

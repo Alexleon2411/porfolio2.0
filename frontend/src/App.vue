@@ -1,14 +1,17 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
 import { RouterView } from 'vue-router';
 import NavBar from './components/NavBar.vue';
-import $ from 'jquery';
+import { useRoute } from 'vue-router';
+import { onMounted, ref } from 'vue';
+
+const route = useRoute();
+
 
 </script>
 
 <template>
-  <NavBar class=""/>
-<RouterView class="mt-20"></RouterView>
+  <NavBar v-if="route.name === 'Home'" />
+  <RouterView class="mt-20"></RouterView>
 </template>
 
 <style scoped>

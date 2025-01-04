@@ -8,8 +8,8 @@
         <div class="row">
           <div class="col-md-6 project-card" v-for="project in projects" :key="project.id">
             <h3>{{ project.name }}</h3>
-            <button @click.stop="fetchProjectById(project.id)" class="mr-2 rounded-lg bg-orange-600 text-white p-2 mb-1"> <v-icon icon="mdi mdi-pencil"></v-icon></button>
-            <button @click="deleteProject(project.id)" class="mr-2 rounded-lg bg-red-600 text-white p-2 mb-2">eliminar</button>
+            <button @click.stop="fetchProjectById(project.id)" class="mr-2 rounded-lg  text-black  px-1 mb-1"><font-awesome-icon icon="edit" /></button>
+            <button @click="deleteProject(project.id)" class="mr-2 rounded-lg  text-black px-1 mb-2"><font-awesome-icon icon="trash" /></button>
             <!-- Carousel navigation buttons -->
             <a class="portfolio-card" @click="showPojectDetails(project.id)">
               <div class="relative">
@@ -91,7 +91,7 @@ const fetchProjectById = async (projectId) => {
   try {
     const data = await store.fetchProjectById(projectId);
     if (data) {
-      router.push({ name: 'update-project', params: { id: projectId } });
+      router.push({ name: 'edit-project', params: { id: projectId } });
     }
     console.log(data);
   } catch (error) {

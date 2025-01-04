@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link :to="{ name: 'projects' }" class="rounded-lg text-white p-2 bg-indigo-900 ml-3">Volver</router-link>
+    <router-link :to="{ name: 'Home' }" class="rounded-lg text-white p-2 bg-indigo-900 ml-3">Volver</router-link>
   </div>
   <div>
     <h1  class=" text-center">{{ project.name }}</h1>
@@ -9,8 +9,6 @@
   <div class="image-container">
     <!-- Imagen principal -->
      <div>
-
-
        <div class="">
          <div class="picZoomer">
            <img class="my_img rounded-lg" :src="selectedImage" alt="Main Image">
@@ -24,6 +22,7 @@
              :key="index" 
              @click="updateViewImage(image)"
              :class="{ active: selectedImage === image }"
+             class="ml-1"
            >
              <img :src="image" :alt="'Thumbnail ' + index">
            </li>
@@ -32,9 +31,9 @@
      </div>
   </div>
 
-  <div class="details-container">
+  <div class="details-container mx-auto mb-12">
     <div class="_product-detail-content">
-      <div class="_p-price-box">
+      <div class="">
         <div class="p-list">
           <h5 class="font-black">Description</h5>
         </div>
@@ -45,22 +44,24 @@
         <h5 class="font-black mt-3">Skills usadas</h5>
         <div class="skills ">
           <div v-for="skill in project.skills"  >
-            <p class="">{{ skill }}</p>
+            <p class="font-medium ">{{ skill }}-</p>
           </div>
         </div>
         <div class="_p-qty-and-cart">
           <h5>Project URL</h5>
-          <a :href="project.projectUrl" target="_blank" class="!-font-black rounded-lg p-2 bg-purple-500"><span style="color: black !important;">Project Link</span></a>
+          <a :href="project.projectUrl" target="_blank" class="!-font-black rounded-lg p-2 underline  decoration-solid"><span style="color: black !important;">Visit the Project</span></a>
         </div>
       </div>
     </div>
   </div>
+  <Footer></Footer>
 </template>
 
 <script setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import { useAppStore } from '../store/appStore';
+  import Footer from '../components/Footer.vue';
 
   const store = useAppStore();
   const route = useRoute();
@@ -131,10 +132,21 @@ const nextImage = () => {
   width: 50%;
 }
 .details-container{
-  margin: 10px auto;
   max-width: 50%;
 }
 
+@media  (max-width: 768px) {
+  .image-container{
+    width: 100%;
+  }
+}
+
+@media  (max-width: 768px) {
+  .details-container{
+    max-width: 100%;
+    margin: 0 10px;
+  }
+}
 .skills {
   display: flex; /* Activar Flexbox */
   flex-wrap: wrap; /* Permitir que los elementos pasen a la siguiente línea si no caben */

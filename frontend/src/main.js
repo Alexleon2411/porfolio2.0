@@ -6,10 +6,13 @@ import { VueFire, VueFireAuth } from 'vuefire'
 import { firebaseApp } from './config/firebase'
 import { createPinia } from 'pinia';
 import router from './router';
+import FontAwesomeIcon from './fontawesome'; 
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate)
 const app = createApp(App)
+
+app.component('font-awesome-icon', FontAwesomeIcon);
 
 app.use(VueFire, {
   firebaseApp,
