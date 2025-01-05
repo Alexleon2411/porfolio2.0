@@ -33,13 +33,13 @@ const router = createRouter({
       path: '/admin',
        name: 'admin',
        component: () => import('../views/admin/AdminLayout.vue'),
-      //  meta: { requiresAuth: true },
+       meta: { requiresAuth: true },
        children: [
         {
         path: 'projects',
         name: 'projects',
         component: () => import('../views/admin/ProjectView.vue'),
-        // meta: { requiresAuth: true },
+        meta: { requiresAuth: true },
         },
         {
           path: 'projects/details/:id',
@@ -67,20 +67,20 @@ const router = createRouter({
 
 //guard de navegacion, simpre toma los tres parametros que son to, from, next
 
-// router.beforeEach(async(to, from, next) => {
-//   // para saber si es necesario la autenticacion
-//   const {data: { requiresAuth } }= await supabase.auth.getSession();
+router.beforeEach(async(to, from, next) => {
+  // para saber si es necesario la autenticacion
+  const {data: { requiresAuth } }= await supabase.auth.getSession();
 
-//   console.log( 'froml router', requiresAuth) 
-//   if (requiresAuth){
+  console.log( 'froml router', requiresAuth) 
+  if (requiresAuth){
     
-//     //comprobar si el usuario esta autenticado
-//     next('/login')
-//   }else {
-//     // no esta protegido el endpoint por lo tanto mostramos la vista
-//     next()
-//   }
-// })
+    //comprobar si el usuario esta autenticado
+    next('/login')
+  }else {
+    // no esta protegido el endpoint por lo tanto mostramos la vista
+    next()
+  }
+})
 
 // function authenticateUser() {
 //   // como estamos usando await y la funcion no es async  entonces debemos  usar promises para tomar los parametros que nos da el promise como ejemplo de una funcion async de esta manera se ejecutara uno de los dos paraetros que tenemos en el promise

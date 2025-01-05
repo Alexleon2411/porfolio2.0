@@ -51,6 +51,7 @@ import { useAppStore } from '../../store/appStore';
  const handleLogin = async() => {
    console.log('Iniciar sesión');
    const result = await store.login(email.value, password.value);
+   store.openDialog = false;
    if (!result) {
      alert('Error al iniciar sesión');
    } 

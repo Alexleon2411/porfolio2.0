@@ -14,7 +14,7 @@
                     <a class="link" href="#portfolio">Portfolio</a>
                 </li>
                 <li class="item">
-                    <button class="link" @click="logout">logout</button>
+                    <a class="link" @click="logout" >logout</a>
                 </li>
             </ul>
             <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
@@ -29,16 +29,27 @@
 <script >
 import $ from 'jquery'
 import { useAppStore } from '../store/appStore';
-import { onMounted, ref } from 'vue';
 
 
 export default {
   name: 'Navbar',
+  data() {
+    return {
+      user: null
+    }
+  },
   methods: {
     async logout() {
       const store = useAppStore();
-      console.log('logout')
+      console.log('logout', this.user)
       await store.logout();
+    }
+  },
+  computed: {
+    user() {
+      const store = useAppStore();
+      console.log(store.user)
+      return store.user;
     }
   },
   mounted() {

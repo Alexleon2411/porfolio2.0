@@ -5,7 +5,7 @@ import { useRouter } from "vue-router";
 
 export const  useAppStore = defineStore('skills', () => {
   const router = useRouter();
-
+  const user = ref(null)
   const imageUrl = ref([])
   const projectData = ref({
     name: '',
@@ -188,6 +188,8 @@ export const  useAppStore = defineStore('skills', () => {
     })
 
     const { data: { session, user, error }} = data
+    user.value = user
+    console.log(user.value)
     if (error) {
       console.log('Error al iniciar sesión:', error.message)
       return false
@@ -205,7 +207,6 @@ export const  useAppStore = defineStore('skills', () => {
       return false;
     }
     console.log('Sesión cerrada correctamente.');
-    router.push({ name: 'login' });
     return true;
   } 
   
@@ -221,6 +222,7 @@ export const  useAppStore = defineStore('skills', () => {
     imageUrl,
     projectData,
     openDialog,
+    user,
   }
 
 }, {

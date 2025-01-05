@@ -1,5 +1,5 @@
 <template>
-  <!-- <AdminNavBar/> -->
+  <AdminNavBar/>
   <div>
     <RouterView/>
   </div>
