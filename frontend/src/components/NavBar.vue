@@ -13,9 +13,6 @@
                 <li class="item">
                     <a class="link" href="#portfolio">Portfolio</a>
                 </li>
-                <li class="item">
-                    <a class="link" @click="logout" >logout</a>
-                </li>
             </ul>
             <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
                 <div class="hamburger-box">

@@ -39,7 +39,6 @@
 
   onMounted(async () => {
     projects.value = await store.getProjects();
-    console.log("from porfolio",projects.value);
   });
 
 </script>

@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { supabase } from '../config/supabaseClient';
 import { useRouter } from "vue-router";
 
-export const  useAppStore = defineStore('skills', () => {
+export const  useAppStore = defineStore('projects', () => {
   const router = useRouter();
   const user = ref(null)
   const imageUrl = ref([])
@@ -97,8 +97,6 @@ export const  useAppStore = defineStore('skills', () => {
       .select('*')
     if(error){
       console.log(error)
-    }else {
-      console.log(data)
     }
     return data
   }
@@ -109,7 +107,7 @@ export const  useAppStore = defineStore('skills', () => {
     if(files.length > 0){
        imageUrls = await uploadImage('project-images2', files);
        projectData.value.imgUrl.push(imageUrls[0])
-       if(!imageUrl) return;
+       if(!imageUrls) return;
     }
     //verificar que las habilidades pasadas desde el componente son diferentes a las que ya tiene el proyecto
     if (skills.length > 0) {
@@ -207,6 +205,7 @@ export const  useAppStore = defineStore('skills', () => {
       return false;
     }
     console.log('Sesión cerrada correctamente.');
+    router.push({ name: 'Home' });
     return true;
   } 
   
