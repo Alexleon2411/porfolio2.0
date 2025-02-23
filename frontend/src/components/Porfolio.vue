@@ -37,6 +37,8 @@
     router.push({ name: 'projects-details', params: { id: projectId } });
   };
 
+  
+
   onMounted(async () => {
     projects.value = await store.getProjects();
   });
