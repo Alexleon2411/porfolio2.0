@@ -46,9 +46,8 @@ export default {
     }
   },
   computed: {
-    user() {
+    userComputed() {
       const store = useAppStore();
-      console.log(store.user)
       return store.user;
     }
   },

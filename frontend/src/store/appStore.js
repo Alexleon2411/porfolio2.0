@@ -97,8 +97,6 @@ export const  useAppStore = defineStore('skills', () => {
       .select('*')
     if(error){
       console.log(error)
-    }else {
-      console.log(data)
     }
     return data
   }
