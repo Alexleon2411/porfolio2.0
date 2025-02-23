@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="mt-5">
     <router-link :to="{ name: 'Home' }" class="rounded-lg text-white p-2 bg-indigo-900 ml-3">Volver</router-link>
   </div>
@@ -7,14 +7,14 @@
   </div>
  
   <div class="image-container">
-    <!-- Imagen principal -->
+   
      <div>
        <div class="">
          <div class="picZoomer">
            <img class="my_img rounded-lg" :src="selectedImage" alt="Main Image">
          </div>
        </div>
-       <!-- Miniaturas -->
+       
        <div class="zoom-thumb">
          <ul class="piclist">
            <li 
@@ -55,14 +55,87 @@
     </div>
   </div>
   <Footer></Footer>
+</template> -->
+<template>
+  <div class="min-h-screen text-white pt-12 px-4 sm:px-6 lg:px-8">
+    <router-link :to="{ name: 'Home' }" class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm">
+      <i class="fas fa-chevron-left mr-2"></i>
+      Volver
+    </router-link>
+
+    <h1 v-motion="{ initial: { opacity: 0, y: -50 }, enter: { opacity: 1, y: 0 } }"
+      class="text-4xl font-extrabold text-center mb-12">
+      {{ project.name }}
+    </h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div>
+        <VueTilt class="transform-gpu">
+          <div v-motion="{ initial: { opacity: 0, scale: 0.8 }, enter: { opacity: 1, scale: 1 } }">
+            <img :src="selectedImage" :alt="project.name" class="rounded-lg shadow-2xl w-full h-auto" />
+          </div>
+        </VueTilt>
+        <div class="flex justify-center mt-4 space-x-2">
+          <button
+            v-for="(image, index) in project.imgUrl"
+            :key="index"
+            @click="updateViewImage(image)"
+            :class="['w-16 h-16 rounded-md overflow-hidden border-2', { 'border-blue-500': selectedImage === image, 'border-transparent': selectedImage !== image }]"
+            v-motion="{ hover: { scale: 1.1 }, tap: { scale: 0.9 } }"
+          >
+            <img :src="image" :alt="`Thumbnail ${index + 1}`" class="w-full h-full object-cover" />
+          </button>
+        </div>
+      </div>
+
+      <div v-motion="{ initial: { opacity: 0, x: 50 }, enter: { opacity: 1, x: 0 } }" class="space-y-8">
+        <div>
+          <h2 class="text-2xl font-bold mb-4">Description</h2>
+          <p class="text-gray-800">{{ project.description }}</p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold mb-4">Skills usadas</h2>
+          <div class="flex flex-wrap gap-2">
+            <span
+              v-for="(skill, index) in project.skills"
+              :key="index"
+              v-motion="{ initial: { opacity: 0, scale: 0 }, enter: { opacity: 1, scale: 1 }, transition: { delay: index * 100 } }"
+              class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm"
+            >
+              {{ skill }}
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold mb-4">Project URL</h2>
+          <a
+            :href="project.projectUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors"
+          >
+            Visit Project
+            <i class="fas fa-external-link-alt ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <Footer></Footer>
 </template>
 
 <script setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  // import VueTilt from 'vue3-tilt'; //no esta funcionando
+  import { useMotion } from '@vueuse/motion';
   import { useAppStore } from '../store/appStore';
   import Footer from '../components/Footer.vue';
 
+
+  const vMotion = useMotion();
   const store = useAppStore();
   const route = useRoute();
   const project = ref({});
