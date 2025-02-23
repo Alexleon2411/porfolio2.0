@@ -18,7 +18,7 @@
           label="Imagen del Projecto"
           id="image"
           name="image"
-          :validation-messages="{ required: 'La imagen del producto es obligatoria' }"
+          :validation-messages="{ required: 'La imagen del projecto es obligatoria' }"
           accept=".jpg, .jpeg, .png"
           multiple
           @change="handleFileChange"

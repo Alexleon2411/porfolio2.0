@@ -10,14 +10,13 @@ import FontAwesomeIcon from './fontawesome';
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate)
+
 const app = createApp(App)
-
+app.use(pinia)
 app.component('font-awesome-icon', FontAwesomeIcon);
-
 app.use(VueFire, {
   firebaseApp,
   modules: [VueFireAuth()],
 })
 app.use(router)
-app.use(pinia)
 app.mount('#app')

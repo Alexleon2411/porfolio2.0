@@ -1,9 +1,8 @@
 
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
-// import { onAuthStateChanged } from 'firebase/auth'
-// import { useFirebaseAuth } from 'vuefire'
 import HomeView from '../views/HomeView.vue'
 import { supabase } from '../config/supabaseClient'
+import { useAppStore } from '../store/appStore'
 
 
 const router = createRouter({
@@ -59,6 +58,21 @@ const router = createRouter({
           component: () => import('../views/admin/EditProjectView.vue'),
           // meta: { requiresAuth: true },
         },
+        {
+          path: 'skills',
+          name: 'Skills',
+          component: () => import('../views/admin/SkillsView.vue'),
+        },
+        {
+          path: 'skills/nuevo',
+          name: 'new-skill',
+          component: () => import('../components/skills/CreateSkills.vue'),
+        },
+        {
+          path: 'skills/editar/:id',
+          name: 'edit-skill',
+          component: () => import('../components/skills/EditSkill.vue'),
+        }
 
        ]
     },
@@ -69,12 +83,13 @@ const router = createRouter({
 
 router.beforeEach(async(to, from, next) => {
   // para saber si es necesario la autenticacion
-  const {data: { requiresAuth } }= await supabase.auth.getSession();
-
+  const {data: {session}} = await supabase.auth.getSession();
+const requiresAuth = to.matched.some(record => record.meta.session)
   console.log( 'froml router', requiresAuth) 
   if (requiresAuth){
     
     //comprobar si el usuario esta autenticado
+    useAppStore().openDialog = true
     next('/login')
   }else {
     // no esta protegido el endpoint por lo tanto mostramos la vista
@@ -82,19 +97,4 @@ router.beforeEach(async(to, from, next) => {
   }
 })
 
-// function authenticateUser() {
-//   // como estamos usando await y la funcion no es async  entonces debemos  usar promises para tomar los parametros que nos da el promise como ejemplo de una funcion async de esta manera se ejecutara uno de los dos paraetros que tenemos en el promise
-//   const auth = useFirebaseAuth()
-
-//   return new Promise((resolve, reject) => {
-//     const unsubscribe = onAuthStateChanged(auth, (user) => {
-//       unsubscribe()
-//       if (user){
-//         resolve()
-//       }else{
-//         reject()
-//       }
-//     })
-//   })
-// }
 export default router

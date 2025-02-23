@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-5">
     <router-link :to="{ name: 'Home' }" class="rounded-lg text-white p-2 bg-indigo-900 ml-3">Volver</router-link>
   </div>
   <div>

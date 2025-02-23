@@ -2,22 +2,39 @@
     <!-- Page Navbar -->
     <nav class="admin-navbar" data-spy="affix" data-offset-top="20">
           <div class="container">
-              <RouterLink :to="{name: 'Home'}" class="logo" >Alejandro</RouterLink>
+              <RouterLink :to="{name: 'Home'}" class="title-color" >Alejandro</RouterLink>
               <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
                   <div class="hamburger-box">
-                    <div class="hamburger-inner"></div>
+                    <ul>
+                        <li>
+                            <RouterLink :to="{name: 'Skills'}" class="link text-white ml-2 uppercase">skills</RouterLink>
+                            <RouterLink :to="{name: 'projects'}" class="link text-white ml-2 uppercase">Projects</RouterLink>
+                            <a @click="logout" class="link text-white ml-2 uppercase ">Logout</a>
+                        </li>
+                    </ul>
                   </div>
               </a>
           </div>
       </nav>
   </template>
   
-  <script >
+<script >
   import $ from 'jquery'
-    import { RouterLink } from 'vue-router';
+  import { useAppStore } from '../store/appStore';
+    import { RouterLink, useRouter } from 'vue-router';
   
   export default {
     name: 'Navbar',
+    methods: {
+      async logout() {
+        const router = useRouter
+        const store = useAppStore();
+        const result = await store.logout();
+        if ( result ) {
+            console.log('logout', this.user)
+        }
+      }
+    },
     mounted() {
       $(document).ready(function() {
         $(".admin-navbar .link").on('click', function(event) {
@@ -48,7 +65,7 @@
       });
     }
   }
-  </script>
+</script>
 <style scoped>
 
 .admin-navbar {
@@ -69,7 +86,7 @@
   -webkit-transition: all, 0.3s;
   transition: all, 0.3s;
   font-family: 'Baloo Paaji', cursive;
-  background: #5996a4;
+  background: #695aa6;
   padding: 10px 0;
 }
 .admin-navbar .container {
@@ -83,9 +100,15 @@
 }
 
 .admin-navbar .nav {
-  display: flex;
-  list-style: none;
-  padding: 0 10px;
+    display: flex;
+    list-style: none;
+    padding: 0 10px;
+    color: #fff;
+}
+.title-color {
+   font-size: calc(20px + (30 - 20) * ((100vw - 300px) / (1300 - 300)));
+  text-decoration: none;
+  color: #fff;
 }
 
 

@@ -2,77 +2,53 @@
 
   <h3 class="items-center flex justify-center mt-10">My Skills</h3>
   <div ref="galleryRef" class="gallery">
-    <div class="w-full mx-auto">
-    </div>
-    <ul class="cards">
-      <li>
-        <div class="body">
-            <img src="../imgs/css3.png" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page" class="icon" >
-            <h6 class="title">CSS</h6>
-            <p class="subtitle">used to give the best cascading style to our projects.</p>
-        </div>
-      </li>
-      <li>
-        <div class="body ">
-            <img src="../imgs/html5.png" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page" class="icon">
-            <h6 class="title">HTML5</h6>
-            <p class="subtitle">building web applications from scratch.</p>
-        </div>
-      </li>
-      <li>
-        <div class="body">
-            <img src="../imgs/javascript (1).png" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page" class="icon">
-            <h6 class="title">Javascript</h6>
-            <p class="subtitle">Used for the best user interaction and a beautiful animation of our project.</p>
-        </div>
-      </li>
-      <li>
-        <div class="body">
-            <img src="../imgs/bootstrap.png" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page" class="icon">
-            <h6 class="title">Bootstrap</h6>
-            <p class="subtitle">to make easier the code that is usually repeated and have a very responsive application.</p>
-        </div>
-      </li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
-      <li>8</li>
-      <li>9</li>
-      <li>10</li>
-      <li>11</li>
-      <li>12</li>
-      <li>13</li>
-      <li>14</li>
-      <li>15</li>
-      <li>16</li>
-      <li>17</li>
-      <li>18</li>
-      <li>19</li>
-      <li>20</li>
-      <li>21</li>
-      <li>22</li>
-      <li>23</li>
-      <li>24</li>
-      <li>25</li>
-      <li>26</li>
-      <li>27</li>
-      <li>28</li>
-      <li>29</li>
-      <li>30</li>
+    
+     <ul class="cards">
     </ul>
   </div>
 </template>
 
 <script setup>
 import { gsap } from 'gsap';
-import { onMounted } from 'vue';
+import { onBeforeMount, onMounted, ref } from 'vue';
+import { useSkillStore } from '../store/skillsStore';
 
-onMounted(() => {
+const store  = useSkillStore();
+const skills = ref([]);
+const galleryRef = ref(null);
+
+onBeforeMount(async () => {
+  try {
+    
+    console.log('Skills loaded before mount:', skills.value);
+  } catch (err) {
+    console.error('Error loading skills:', err);
+  }
+});
+
+onMounted(async () => {
+  skills.value = await store.fetchSkills();
+  const gallery = galleryRef.value;
+  const cards = gallery?.querySelector('.cards');
+  skills.value.forEach((skill) => {
+    const listItem = document.createElement('li');
+
+    listItem.innerHTML = `
+      <div class="body">
+        <img src="${skill['image-url']}" alt="Skill image" class="icon" />
+        <h6 class="title">${skill.name}</h6>
+        <p class="subtitle">${skill.description}</p>
+      </div>
+    `;
+
+    cards.appendChild(listItem);
+  });
+  const listItems = gsap.utils.toArray('.cards li');
+
   const spacing = 0.1,
         snap = gsap.utils.snap(spacing),
-        cards = gsap.utils.toArray('.cards li'),
-        seamlessLoop = buildSeamlessLoop(cards, spacing);
+        seamlessLoop = buildSeamlessLoop(listItems, spacing);
+
 
   // Configuración de la animación automática
   const animation = gsap.to(seamlessLoop, {
@@ -83,7 +59,7 @@ onMounted(() => {
   });
 
   // Detener la animación al hacer hover
-  cards.forEach(card => {
+  listItems.forEach(card => {
     card.addEventListener("mouseenter", () => animation.pause()); // Pausa la animación
     card.addEventListener("mouseleave", () => animation.resume()); // Reanuda la animación
   });
@@ -157,6 +133,17 @@ onMounted(() => {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
+.icon {
+  border-radius: 20px;
+}
+
+.title, .subtitle { 
+  color: #fff;
+}
+.subtitle{
+  padding: 0 5px;
+}
+
 
 .cards li {
 	list-style: none;
